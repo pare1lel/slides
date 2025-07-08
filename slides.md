@@ -15,6 +15,8 @@ drawings:
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
+# enable download-as-pdf with clicks
+download: true
 ---
 
 # My Slides Collection

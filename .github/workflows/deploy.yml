@@ -32,10 +32,10 @@ jobs:
         run: nci
 
       - name: Build
-        run: nr build --base /${{github.event.repository.name}}/
-      
+        run: nr build --base /${{github.event.repository.name}}/ --with-clicks
+
       - name: Build for linear-algebra.md
-        run: nr build linear-algebra.md --base /${{github.event.repository.name}}/la/ --out dist/la
+        run: nr build linear-algebra.md --base /${{github.event.repository.name}}/la/ --out dist/la --with-clicks
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
