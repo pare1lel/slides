@@ -25,8 +25,14 @@ Dongwu Chen (PKU EECS)
   Press Space for next page <carbon:arrow-right />
 </div>
 
-<div class="absolute bottom-2 right-2 text-xs">
+<div class="absolute bottom-2 left-2 text-xs">
   {{ new Date().toLocaleDateString() }}
+</div>
+
+<div class="abs-br m-6 text-xl">
+  <a href="https://github.com/pare1lel/slides" target="_blank" class="slidev-icon-btn">
+    <carbon:logo-github />
+  </a>
 </div>
 
 ---
@@ -64,9 +70,9 @@ An undergraduate student at PKU EECS
 
 The <u>foundation</u> of linear algebra, from an <u>algorithmic</u> perspective.
 
-1. From Vector Space to Linear Basis.
-2. From Linear Transformation to Characteristic Polynomial.
-3. From LGV Lemma to Matrix-Tree Theorem.
+1. From <Link to="4">Vector Space</Link> to <Link to="8">Linear Basis</Link>.
+2. From <Link to="12">Linear Map</Link> to <Link to="18">Characteristic Polynomial</Link>.
+3. From <Link to="20">LGV lemma</Link> to <Link to="22">Matrix-Tree theorem</Link>.
 
 <div class="absolute top-2 right-2 text-xs">
   <SlideCurrentNo /> / <SlidesTotal />
@@ -317,6 +323,9 @@ $$
 <style> h1 { color: #2B90B6; } </style>
 
 ---
+transition: slide-up
+level: 2
+---
 
 # Exercise?
 
@@ -364,3 +373,401 @@ $$
 </div>
 
 <style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Linear Map
+
+A mapping that preserves the vector space structure.
+
+- Given $F$-vector spaces $V$ and $W$, a [linear map](https://en.wikipedia.org/wiki/Linear_map) is a function $f: V \to W$ satisfying:
+  - $f(v + w) = f(v) + f(w)$ for all $v, w \in V$.
+  - $f(\alpha v) = \alpha f(v)$ for all $\alpha \in F$ and $v \in V$.
+- If $f:V\to W$ and $g:U\to V$ are linear maps, the composition $fg: U \to W$ is also a linear map.
+- If $f:V\to W$ is a bijection and linear map, $f^{-1}$ is also a linear map, and we call $f$ is an [isomorphism](https://en.wikipedia.org/wiki/Isomorphism).
+  - $V$ and $W$ are equivalent when discussing the vector space structures.
+  - Given a basis $(v_1, \ldots, v_n)$ of $V$, linear map $\varphi_\mathbf{v}: F^n \to V$ defined by $\varphi_\mathbf{v}(e_i) = v_i$ is an isomorphism.
+
+<div v-click>
+
+- Let $\mathrm{Hom}(V, W)$ be the set of all linear maps from $V$ to $W$, it's also a vector space:
+  - Addition: $(f + g)(v) = f(v) + g(v)$ for all $v \in V$.
+  - Scalar multiplication: $(\alpha f)(v) = \alpha f(v)$ for all $\alpha \in F$ and $v \in V$.
+- What's the dimension and basis of $\mathrm{Hom}(V, W)$?
+
+</div>
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Matrix = Linear Map on Basis
+
+- Given a field $F$ and $m,n\in\mathbb Z_{\ge 1}$, let $\mathrm{M}_{m\times n}(F)$ be the set of all $m\times n$ [matrices](https://en.wikipedia.org/wiki/Matrix_(mathematics)) with entries in $F$.
+  - Considering an $m\times n$ matrix as an $mn$-dimensional vector, $\mathrm{M}_{m\times n}(F)$ is also a vector space.
+- Given a basis $(v_1, \ldots, v_n)$ of $V$ and $(w_1, \ldots, w_m)$ of $W$, we have the isomorphism:
+  $$
+  \begin{aligned}
+  \mathcal{M}_\mathbf{v}^\mathbf{w}:\mathrm{Hom}(V, W) &\xrightarrow{\sim} \mathrm{M}_{m\times n}(F) \\
+  f &\mapsto (a_{ij})_{i,j}, \text{ where } f(v_j) = \sum_{i\in[m]} a_{ij} w_i.
+  \end{aligned}
+  $$
+  - If $W=F^m$ and $(w_1, \ldots, w_m)$ is the standard basis, we can write $A=(f(v_1) \mid \cdots \mid f(v_n))$.
+  - The [matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication) corresponds to the composition of linear maps:
+  $$
+  fg(u_k)=f\left(\sum_j b_{jk} v_j\right)=\sum_j b_{jk} f(v_j)=\sum_j b_{jk} \sum_i a_{ij} w_i=\sum_i{\color{#2B90B6}\left(\sum_j a_{ij}b_{jk}\right)} w_i.
+  $$
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Kernel, Image, and Rank
+
+- Given a linear map $f:V\to W$, we define:
+  - The [kernel](https://en.wikipedia.org/wiki/Kernel_(linear_algebra)) of $f$ as $\ker f:=\{v\in V \mid f(v)=0\}=f^{-1}(0)$.
+  - The [image](https://en.wikipedia.org/wiki/Image_(mathematics)) of $f$ as $\operatorname{im} f:=\{w\in W \mid w=f(v) \text{ for some } v\in V\}$.
+  - The [rank](https://en.wikipedia.org/wiki/Rank_(linear_algebra)) of $f$ as $\mathrm{rk}(f):=\dim(\operatorname{im} f)$.
+- $\ker f$ is a subspace of $V$, and $\operatorname{im} f$ is a subspace of $W$.
+- The rank $\mathrm{rk}(A)$ of $A\in\mathrm{M}_{m\times n}(F)$ is the rank of $A$ as a linear map $F^n \to F^m$.
+- The [rank–nullity theorem](https://en.wikipedia.org/wiki/Rank%E2%80%93nullity_theorem) states that $\dim V = \mathrm{rk}(f) + \dim(\ker f)$.
+  - Select a basis $(u_1, \ldots, u_k)$ of $\ker f$ and $(w_1, \ldots, w_m)$ of $\operatorname{im} f$.
+  - Select $v_i\in V$ such that $f(v_i)=w_i$ for all $i\in[m]$.
+  - Then $(u_1, \ldots, u_k, v_1, \ldots, v_m)$ is a basis of $V$.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Change of Basis
+
+- Given $f:V\to W$ and bases $\mathbf{v}, \mathbf{v}'$ of $V$ and $\mathbf{w}, \mathbf{w}'$ of $W$, how to express $\mathcal{M}_{\mathbf{v}'}^{\mathbf{w}'}(f)$ by $\mathcal{M}_{\mathbf{v}}^{\mathbf{w}}(f)$?
+  - Let $P_{\mathbf{v}'}^{\mathbf{v}}:F^n\to F^n$ be the change of basis from $\mathbf{v'}$ to $\mathbf{v}$,
+  - where $(x_1', \ldots, x_n') \mapsto (x_1, \ldots, x_n)$ is defined by $\sum_{i=1}^n x_iv_i=\sum_{i=1}^n x_i'v_i'$.
+  - $P_{\mathbf{v}'}^{\mathbf{v}}=\varphi_{\mathbf{v}'}^{-1}\varphi_{\mathbf{v}}$, where $\varphi_{\mathbf{v}}:F^n\to V$ is the <Link to="12">basis isomorphism</Link>. $(P_{\mathbf{v}'}^{\mathbf{v}})^{-1}=P_{\mathbf{v}}^{\mathbf{v}'}$.
+  - Conversely, given any isomorphism $P$ and a basis $\mathbf{v}'$, we can find $\mathbf{v}$ such that $P=P_{\mathbf{v}'}^{\mathbf{v}}$.
+- $\mathcal{M}_{\mathbf{v}'}^{\mathbf{w}'}(f)=(P_{\mathbf{w}'}^{\mathbf{w}})^{-1} \mathcal{M}_{\mathbf{v}}^{\mathbf{w}}(f) P_{\mathbf{v}'}^{\mathbf{v}}$.
+
+<div v-click>
+
+- Given $m\times n$ matrices $A,B$, we call them [equivalent](https://baike.baidu.com/item/%E7%9B%B8%E6%8A%B5%E7%9F%A9%E9%98%B5/13678808) if $\exists$ isomorphisms $P$ and $Q$ such that $B=QAP$.
+  - Equivalent matrices represent the same linear map in different bases.
+  - Since all invertible matrices can be expressed as products of [elementary matrices](https://en.wikipedia.org/wiki/Elementary_matrix),  
+    "Equivalence" is equivalent to $\exists$ a sequence of elementary operations that transforms $A$ into $B$.
+- $A$ is equivalent to $D_r:=\operatorname{diag}(1_{r\times r},0_{(m-r)\times(n-r)})$, where $r:=\mathrm{rk}(A)$.
+  - $A$ is equivalent to $B$ iff $\mathrm{rk}(A)=\mathrm{rk}(B)$.
+- Given $n\times n$ matrices $A,B$, we call them [similar](https://en.wikipedia.org/wiki/Matrix_similarity) if $\exists$ an isomorphism $P$ such that $B=P^{-1}AP$.
+  - Similar matrices represent the same [endomorphism](https://en.wikipedia.org/wiki/Endomorphism) in different bases.
+
+</div>
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+transition: fade
+level: 2
+---
+
+# Determinant
+
+- The [determinant](https://en.wikipedia.org/wiki/Determinant) originated from the [Cramer's rule](https://en.wikipedia.org/wiki/Cramer%27s_rule) for solving linear equations.
+  - Now the determinant is more about <u>signed volume</u> and [exterior algebra](https://en.wikipedia.org/wiki/Exterior_algebra).
+- Let $v_1 \wedge \cdots \wedge v_n$ represent the signed volume of the [parallelotope](https://en.wikipedia.org/wiki/Parallelepiped#Parallelotope) spanned by $v_1, \ldots, v_n$.
+  - For $V$ with $\dim V=n$, the $n$-th [exterior power](https://en.wikipedia.org/wiki/Exterior_algebra#Exterior_power) $\bigwedge^n(V)$ is the vector space spanned by these volumes.
+- The wedge products satisfy the following properties:
+  - Degeneration: If $v_1, \ldots, v_n$ are linearly dependent, $v_1 \wedge \cdots \wedge v_n = 0$.
+  - Addition: $v_1 \wedge \cdots (v_i+v) \cdots \wedge v_n = v_1 \wedge \cdots v_i \cdots \wedge v_n + v_1 \wedge \cdots v \cdots \wedge v_n$.
+  - Scalar multiplication: $v_1 \wedge \cdots (\alpha v_i) \cdots \wedge v_n = \alpha (v_1 \wedge \cdots \wedge v_n)$.
+
+<div v-click>
+
+- $\dim \bigwedge^n(V) = 1$, where $v_1\wedge\cdots\wedge v_n$ forms a basis for any basis $(v_1, \ldots, v_n)$ of $V$.
+  - Given an endomorphism $f:V\to V$, it induces an endomorphism $\bigwedge^n(f):\bigwedge^n(V)\to\bigwedge^n(V)$ as
+  $$v_1 \wedge \cdots \wedge v_n \mapsto f(v_1) \wedge \cdots \wedge f(v_n).$$
+  - $\bigwedge^n(f)$ must be a scalar multiplication, the coefficient is called the [determinant](https://en.wikipedia.org/wiki/Determinant) of $f$, denoted $\det(f)$.
+  - The determinant $\det(A)$ of $A\in\mathrm{M}_{n\times n}(F)$ is the determinant as a linear map $F^n\to F^n$.
+
+</div>
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Determinant
+
+- From the definition, we can prove the following properties:
+  - [Leibniz formula](https://en.wikipedia.org/wiki/Determinant#Leibniz_formula): For $A=(a_{ij})_{i,j}\in\mathrm{M}_{n\times n}(F)$, we have:
+  $$\det(A)=\sum_{\sigma\in\mathfrak S_n} \operatorname{sgn}(\sigma) \prod_{i=1}^n a_{i,\sigma(i)}.$$
+  - Multiplicativity: $\det(AB)=\det(A)\det(B)$ for all $A,B\in\mathrm{M}_{n\times n}(F)$.
+  - Calculated by [Gauss-Jordan elimination](https://www.luogu.com.cn/problem/P7112), with time complexity $O(n^3)$.
+  - [Laplace expansion](https://en.wikipedia.org/wiki/Laplace_expansion): For $A=(a_{ij})_{i,j}\in\mathrm{M}_{n\times n}(F)$, let $M_{ij}$ be the [minor](https://en.wikipedia.org/wiki/Minor_(linear_algebra)) of $a_{ij}$, then:
+  $$\det(A)=\sum_{j=1}^n (-1)^{i+j} a_{ij} M_{ij}=\sum_{i=1}^n (-1)^{i+j} a_{ij} M_{ij}.$$
+- The [adjugate matrix](https://en.wikipedia.org/wiki/Adjugate_matrix) $A^\lor$ is the transpose of the cofactor matrix of $A$.
+  - $AA^\lor=A^\lor A=\det(A)\cdot 1_{n\times n}$, and $A^{-1}=(\det(A))^{-1}A^\lor$ when $\det(A)$ is invertible.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Characteristic Polynomial
+
+- The determinant can be generalized to any commutative ring e.g. the polynomial ring $F[X]$.
+- The [characteristic polynomial](https://en.wikipedia.org/wiki/Characteristic_polynomial) $\mathrm{Char}_A=\det(X\cdot 1_{n\times n}-A)$, where $X\cdot 1_{n\times n}-A\in\mathrm{M}_{n\times n}(F[X])$.
+- Similar matrices have the same characteristic polynomial i.e. $\mathrm{Char}_{P^{-1}AP}=\mathrm{Char}_A$.
+- [Cayley–Hamilton theorem](https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem): For any $A\in\mathrm{M}_{n\times n}(F)$, we have $\mathrm{Char}_A(A)=0_{n\times n}$.
+  - Proof omitted. It's trivial when you know what is [Frobenius normal form](https://en.wikipedia.org/wiki/Frobenius_normal_form).
+- The roots $\lambda$ of the characteristic polynomial are the [eigenvalues](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors) of the matrix.
+  - $\lambda\cdot 1_{n\times n}-A$ is not full rank, i.e. there exists a non-zero vector $v$ such that $Av=\lambda v$.
+  - $V_\lambda := \ker(\lambda\cdot 1_{n\times n}-A)$ is called the $\lambda$-eigenspace. $V_\lambda\ne\{0\}\iff \lambda$ is an eigenvalue of $A$.
+  - $A$ is [diagonalizable](https://en.wikipedia.org/wiki/Diagonalizable_matrix) i.e. similar to diagonal matrices $\iff$ the sum of dimension of eigenspaces $=n$.
+- The characteristic polynomial can be calculated in time complexity $O(n^3)$. Check [QOJ59](https://qoj.ac/problem/59) for details.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+transition: slide-up
+level: 2
+---
+
+# Exercises
+
+- [LOJ3626](https://loj.ac/p/3626) is a problem for computing determinants.
+- [UOJ655](https://uoj.ac/problem/655) is an interactive puzzle game about determinants.
+- [xmascon20-d](https://atcoder.jp/contests/xmascon20/tasks/xmascon20_d) is another problem for computing determinants.
+- [CF923E](https://codeforces.com/problemset/problem/923/E) uses the diagonalization to optimize the power of a matrix.
+- [UOJ646](https://uoj.ac/problem/646) is a problem of predicting a pseudo-random sequence. Why is it here?
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Lindström–Gessel–Viennot lemma
+
+- Let $G$ be a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph), each edge has a weight in a commutative ring.
+  - For a path $P$, let the path weight $\omega(P)$ be the product of the edge weights along $P$.
+  - For two vertices $u$ and $v$, let $\omega(u,v):=\sum_{P:u\to v}\omega(P)$ be the sum of $\omega(P)$ of all paths $P$ from $u$ to $v$.
+- Given two tuples of vertices $(s_1, \ldots, s_n)$ and $(t_1, \ldots, t_n)$, we call $(P_1, \ldots, P_n)$ is an <u>$n$-path</u> if:
+  - There <u>exists a permutation</u> $\sigma(P)\in\mathfrak S_n$ such that $P_i$ is a path from $s_i$ to $t_{\sigma(i)}$.
+- We call an $n$-path is <u>non-crossing</u> if the paths do not have any common vertex.
+  - Let $\omega(P):=\prod_{i=1}^n \omega(P_i)$ be the product of the weights of the $n$ paths.
+
+<div v-click>
+
+- Let the matrix $M:=(m_{ij})_{i,j}$, where $m_{ij}:=\omega(s_i,t_j)$.
+  - The [LGV lemma](https://en.wikipedia.org/wiki/Lindstr%C3%B6m%E2%80%93Gessel%E2%80%93Viennot_lemma) states that $\det(M)$ is the sum of $\operatorname{sgn}(\sigma(P))\omega(P)$ over all non-crossing $n$-paths $P$.
+- *Proof.* Let $P$ be any crossing $n$-path, smallest $(i,j)$ such that $P_i$ crosses $P_j$, and smallest crossing vertex $u$.
+  - Let $P'$ be the $n$-path obtained by swapping the parts of $P_i$ and $P_j$ after $u$.
+  - $\omega(P)=\omega(P')$ and the signs are opposite, so the terms cancel each other. *Q.E.D.*
+- Be careful to <u>avoid end-point swaps</u> when applying the lemma.
+
+</div>
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Cauchy–Binet formula
+
+- Given $A\in\mathrm{M}_{n\times m}(F)$ and $B\in\mathrm{M}_{m\times n}(F)$, let $A_{[n],S}$ and $B_{S,[n]}$ be the submatrices of $A$ and $B$:
+  $$\det(AB)=\sum_{|S|=n} \det(A_{[n],S})\det(B_{S,[n]}).$$
+- *Proof Sketch.* Apply the LGV lemma to the 3-layer DAG.
+- [LOJ3533](https://loj.ac/p/3533) is a direct application of the Cauchy–Binet formula.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+transition: fade
+level: 2
+---
+
+# Matrix-Tree theorem
+
+- Given a simple undirected graph $G=(V,E)$ with edge weights $w:E\to F$.
+- Let $A=(a_{ve})_{v,e}\in\mathrm{M}_{n\times m}(F)$ be the [incidence matrix](https://en.wikipedia.org/wiki/Incidence_matrix) of $G$, where:
+  $$ a_{ve} := \begin{cases} \sqrt{w(e)}, & \text{if } v \text{ is the smaller endpoint of } e, \\ -\sqrt{w(e)}, & \text{if } v \text{ is the larger endpoint of } e, \\ 0, & \text{otherwise}. \end{cases}$$
+- Let $B\in\mathrm{M}_{(n-1)\times m}(F)$ be the matrix obtained by removing the first row of $A$.
+- Apply the Cauchy–Binet formula to $BB^\top$:
+  $$\det(BB^\top)=\sum_{|S|=n-1} \det(B_{[n-1],S})^2.$$
+- $BB^\top$ is a submatrix of the [Laplacian matrix](https://en.wikipedia.org/wiki/Laplacian_matrix) of $G$ and can be calculated easily.
+- What does $\det(B_{[n-1],S})^2$ mean?
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Matrix-Tree theorem
+
+- From the Leibniz formula, $\det(B_{[n-1],S})$ means enumerating a bijection between $V\setminus\{v_1\}$ and $S$.
+  - Each corresponding vertex and edge must be adjacent.
+- If $S$ does not contain a cycle i.e. forms a spanning tree:
+  - The bijection is unique and $\det(B_{[n-1],S})^2$ is the product of edge weights of the spanning tree.
+- If $S$ contains a cycle, choose any cycle $C$ in $S$:
+  - For each bijection $\sigma$, reverse the order of the vertices in $C$ to get another bijection $\sigma'$.
+  - If $|C|$ is odd, the signs are same, and the products of weights are opposite.
+  - If $|C|$ is even, the signs are opposite, and the products of weights are same.
+  - The contributions of $\sigma$ and $\sigma'$ cancel each other, $\det(B_{[n-1],S})=0$.
+- In conclusion, we proved [the Matrix-Tree theorem](https://en.wikipedia.org/wiki/Kirchhoff%27s_theorem):
+  - The sum of the product of edge weights of all spanning trees $=\det(BB^\top)$.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Matrix-Tree theorem: directed version
+
+- Given a directed graph $G=(V,E)$ with edge weights $w:E\to F$.
+  - We want to find the sum of the product of edge weights of all <u>inner spanning trees</u> rooted at $v_1$.
+- Let $A=(a_{ve})_{v,e}$ and $A'=(a'_{ve})_{v,e}$ be the modified incidence matrices of $G$, where:
+  $$a_{ve} := \begin{cases} \sqrt{w(e)}, & \text{if } v \text{ is the head of } e, \\ -\sqrt{w(e)}, & \text{if } v \text{ is the tail of } e, \\ 0, & \text{otherwise}, \end{cases}$$
+  $$a'_{ve} := \begin{cases} \sqrt{w(e)}, & \text{if } v \text{ is the head of } e, \\ 0, & \text{otherwise}. \end{cases}$$
+- Let $B$ and $B'$ be the matrices obtained by removing the first row of $A$ and $A'$, respectively.
+- $\det(BB'^\top)$ is what we want. Proof is left as an exercise.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+
+# Matrix-Tree theorem: spanning forest
+
+- Given a simple undirected graph $G=(V,E)$.
+  - A $k$-spanning forest is an edge subset that contains $k$ connected components and no cycles.
+  - The weight of a $k$-spanning forest is <u>the product of the size</u> of each connected component.
+  - We want to find the sum of the weights of all $k$-spanning forests.
+- Enumerate the roots of the connected components $S\subseteq V$.
+  - The number of $k$-spanning forests is the principal minor of $L=AA^\top$ indexed by $V\setminus S$.
+- The answer is the $k$-th order coefficient of $\mathrm{Char}_L\times(-1)^{n-k}$. 
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+transition: slide-up
+level: 2
+---
+
+# Exercises
+
+- [LOJ3409](https://loj.ac/p/3409) is a counting problem related to <span class="heimu">Cauchy–Binet formula</span>.
+- [LOJ6759](https://loj.ac/p/6759) is a... maximum flow problem?
+- [LOJ3630](https://loj.ac/p/3630) is a counting problem related to <span class="heimu">the LGV lemma</span>.
+- [Gym102978A](https://codeforces.com/gym/102978/problem/A) is a Young tableaux counting problem.
+- [Luogu5296](https://www.luogu.com.cn/problem/P5296) is an application of the Matrix-Tree theorem.
+- [QOJ2073](https://qoj.ac/problem/2073) is a knowledge-oriented problem about:
+  - The Matrix-Tree theorem, <span class="heimu">[Kronecker sum](https://mathworld.wolfram.com/KroneckerSum.html)</span>, and <span class="heimu">[resultant](https://en.wikipedia.org/wiki/Resultant)</span>.
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+h1 { color: #2B90B6; }
+.heimu, .heimu a, a .heimu, .heimu a.new {
+  transition: color 0.13s linear;
+  background-color: #252525;
+  color: #252525;
+  text-shadow: none;
+}
+.heimu:hover, .heimu:active,
+.heimu:hover .heimu, .heimu:active .heimu {
+  color: white !important;
+}
+.heimu:hover a, a:hover .heimu,
+.heimu:active a, a:active .heimu {
+  color: lightblue !important;
+}
+.heimu:hover .new, .heimu .new:hover, .new:hover .heimu,
+.heimu:active .new, .heimu .new:active, .new:active .heimu {
+  color: #BA0000 !important;
+}
+</style>
+
+---
+
+# Further Reading
+
+- [Algebra textbooks](https://wwli.asia/index.php/zh/books-item-zh) written by [Wenwei Li](https://wwli.asia/index.php/zh/):
+  - The reading order is [EAlg-Notes](https://wwli.asia/downloads/books/EAlg-Notes.pdf) → [Al-jabr-1](https://wwli.asia/downloads/books/Al-jabr-1.pdf) → [Al-jabr-2](https://wwli.asia/downloads/books/Al-jabr-2.pdf).
+  - The first book is useful for the first year college math courses. Many of the narratives are OI-friendly.
+  - The third book is very "hardcore". Read only if you have enough experience in related fields.
+- Some old lecture notes I made, of poor quality and may be difficult to understand:
+  - [Linear Algebra](http://www.gdfzoj.com:23380/post/813) in Oct 2021, [Selected Problems](http://www.gdfzoj.com:23380/post/845) in Mar 2022, [Selected Problems](http://www.gdfzoj.com:23380/post/864) in Jun 2022.
+  - Contact the administrator (?) if you don't have access to the site.
+- [Slides](http://www.gdfzoj.com:23380/post/1156) about the linear algebra made by [nealchen](https://codeforces.com/profile/nealchen).
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
+
+---
+layout: center
+class: text-center
+---
+
+# Thank you for listening!
+
+[GitHub](https://github.com/pare1lel/slides) · [Source File](https://github.com/pare1lel/slides/blob/main/linear-algebra.md?plain=1)
+
+<PoweredBySlidev mt-10 />
+
+<div class="absolute top-2 right-2 text-xs">
+  <a href="https://www.bilibili.com/video/BV1v5TuzJEid/" target="_blank"><SlideCurrentNo /></a> / <SlidesTotal />
+</div>
+
+<style>h1 { color: #2B90B6; }</style>

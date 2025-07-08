@@ -1,11 +1,5 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# My Slides Collection
 
-To start the slide show:
+我使用 [Slidev](https://cn.sli.dev/) 制作的 Slides 合集, 部署在 [Github Pages](https://pare1lel.github.io/slides/).
 
-- `pnpm install`
-- `pnpm dev`
-- visit <http://localhost:3030>
-
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev at the [documentation](https://sli.dev/).
+部署时需要在 [deploy.yml](https://github.com/pare1lel/slides/blob/main/.github/workflows/deploy.yml) 为每个 Markdown 文件添加编译命令, 感觉不太优雅, 会弄的可以教教我 /kel.

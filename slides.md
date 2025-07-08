@@ -25,12 +25,24 @@ Dongwu Chen (PKU EECS)
   Press Space for next page <carbon:arrow-right />
 </div>
 
-<div class="absolute bottom-2 right-2 text-xs">
+<div class="absolute bottom-2 left-2 text-xs">
   {{ new Date().toLocaleDateString() }}
+</div>
+
+<div class="abs-br m-6 text-xl">
+  <a href="https://github.com/pare1lel/slides" target="_blank" class="slidev-icon-btn">
+    <carbon:logo-github />
+  </a>
 </div>
 
 ---
 
 # Table of Contents
 
-1. Linear Algebra in OI
+1. [Linear Algebra in OI](https://pare1lel.github.io/slides/la/)
+
+<div class="absolute top-2 right-2 text-xs">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style> h1 { color: #2B90B6; } </style>
