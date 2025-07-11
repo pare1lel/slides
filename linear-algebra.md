@@ -690,6 +690,8 @@ level: 2
 - Enumerate the roots of the connected components $S\subseteq V$.
   - The number of $k$-spanning forests is the principal minor of $L=AA^\top$ indexed by $V\setminus S$.
 - The answer is the $k$-th order coefficient of $\mathrm{Char}_L\times(-1)^{n-k}$. 
+  - For $k=1$, the number of spanning trees $=\frac 1n\prod_{k=1}^{n-1}\lambda_k$,
+  - where $\lambda_1\ge\cdots\ge\lambda_{n-1}\ge \lambda_n=0$ are the eigenvalues of $L$.
 
 <div class="absolute top-2 right-2 text-xs">
   <SlideCurrentNo /> / <SlidesTotal />
@@ -750,6 +752,17 @@ h1 { color: #2B90B6; }
   - [Linear Algebra](http://www.gdfzoj.com:23380/post/813) in Oct 2021, [Selected Problems](http://www.gdfzoj.com:23380/post/845) in Mar 2022, [Selected Problems](http://www.gdfzoj.com:23380/post/864) in Jun 2022.
   - Contact the administrator (?) if you don't have access to the site.
 - [Slides](http://www.gdfzoj.com:23380/post/1156) about the linear algebra made by [nealchen](https://codeforces.com/profile/nealchen).
+
+<div v-click>
+
+- Chinese Candidate Team Thesis in [this repository](https://github.com/enkerewpo/OI-Public-Library).
+  - Read **all** the theses from the last 10 years, but mostly **skimming**.
+  - Careful reading is for the topics that interest you or that you find necessary.
+- Related theses of this slide:
+  - 「两类递推数列的性质和应用」by 钟子谦 in 2019.
+  - 「浅谈线性代数与图论的关系」by 潘佳奇 in 2021.
+
+</div>
 
 <div class="absolute top-2 right-2 text-xs">
   <SlideCurrentNo /> / <SlidesTotal />
