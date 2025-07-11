@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://www.loliapi.com/acg/pc/
+background: https://img.loliapi.com/i/pc/img324.webp
 # some information about your slides (markdown enabled)
 title: My Slides Collection
 # apply unocss classes to the current slide
