@@ -17,6 +17,11 @@ transition: slide-left
 mdc: true
 # enable download-as-pdf with clicks
 download: true
+# set fonts
+fonts:
+  sans: "LXGW WenKai"
+  serif: "LXGW WenKai"
+  mono: "LXGW WenKai Mono"
 ---
 
 # My Slides Collection
@@ -42,6 +47,7 @@ Dongwu Chen (PKU EECS)
 # Table of Contents
 
 1. [Linear Algebra in OI](https://pare1lel.github.io/slides/la/)
+2. [「汉英翻译: 理论与实践」笔记](https://pare1lel.github.io/slides/tr/)
 
 <div class="absolute top-2 right-2 text-xs">
   <SlideCurrentNo /> / <SlidesTotal />
